@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+	<title>Mapa Brasil - BDG</title>
+</head>
+
+<style type="text/css">
+path {
+  stroke-linejoin: round;
+  fill: #ddd;
+  stroke: #C0C0C0;
+}
+
+.corinthians{
+	fill: #DAA520;
+	stroke: none;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+}
+.palmeiras{
+	fill: #00FF00;
+	stroke: none;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+}
+.santos{
+	fill: #800080;
+	stroke: none;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+}
+.saoPaulo{
+	fill: #800000;
+	stroke: none;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+}
+.states {
+	fill: #ddd;
+ 	stroke: #fff;
+}
+</style>
+
+<body>
+<div id="mapa-principal"/> 
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js" charset="utf-8"></script>
+<script>
+//definindo tamanho do svg
+var width = 900,
+	height = 650;
+//criando elemento svg
+var svg = d3.select("body").append("svg")
+	.attr("width", width)
+	.attr("height", height);
+
+//projecao cartografica que vai gerar o mapa
+var projection = d3.geo.mercator()//existem outras
+		.center([-55,-10])//centro do mapa, posicoes latitude e longitude brasil
+		.scale(750)//tamanho do grafico apresentado na tela
+	;
+//"lapis de desenhar" desenha o shape dos estados
+var path = d3.geo.path()
+	.projection(projection)
+	.pointRadius(2.5);//vai desenhar na tela de acordo com a projecao cartografica
+
+//para carregar o arquivo mais rapido
+/*.defer(d3.json,"mapa_brasil_topo_json/br-states-heavy.json")//carrega o arquivo*/
+queue()
+	.defer(d3.json,"../mapa_brasil_topo_json/states.json")//carrega o arquivo
+	.defer(d3.json,"../data_json/corinthians_alter_topo.json")
+	.defer(d3.json,"../data_json/palmeiras_alter_topo.json")
+	.defer(d3.json,"../data_json/santos_alter_topo.json")
+	.defer(d3.json,"../data_json/saoPaulo_alter_topo.json")
+	.await(ready);
+
+//Para colorir
+var color = d3.scale.ordinal()
+  .range(["#FFEBCD","#FAFAD2","#F0F8FF","#E0FFFF","#EEE8AA"]);
+
+function ready (error, br_states,time1,time2,time3,time4){
+	if(error) return console.error(error);
+
+     //cria um geojson com todas as informações dos estados, tira todas
+     //informacoes extras
+     var states = br_states;
+     var corinthians = topojson.feature(time1,time1.objects.corinthians);
+     var palmeiras = topojson.feature(time2,time2.objects.palmeiras);
+     var santos = topojson.feature(time3,time3.objects.santos);
+     var saoPaulo = topojson.feature(time4,time4.objects.saoPaulo);
+
+     //desenha o mapa na tela
+     //versao com cor
+    svg.append("g")
+        .attr("class","states")//atribuindo uma class 'states' para todos os estados
+      .selectAll("path")
+        .data(states.features)
+      .enter().append("path")
+                              //tira os espacos em branco e pega o tamanho
+        .style('fill',function(d){return color(d.properties.region.length);})
+        .attr("d",path)   
+      ;
+
+     svg.append("path")
+       .datum(corinthians)//desenha de acordo com os estados
+       .attr("d", path)//posicoes do poligono definadas pela path
+       .attr("class","corinthians")//atribuindo uma class 'states' para todos os estados
+       ;
+
+     svg.append("path")
+       .datum(palmeiras)//desenha de acordo com os estados
+       .attr("d", path)//posicoes do poligono definadas pela path
+       .attr("class","palmeiras")//atribuindo uma class 'states' para todos os estados
+       ;
+    svg.append("path")
+       .datum(santos)//desenha de acordo com os estados
+       .attr("d", path)//posicoes do poligono definadas pela path
+       .attr("class","santos")//atribuindo uma class 'states' para todos os estados
+       ;
+     svg.append("path")
+       .datum(saoPaulo)//desenha de acordo com os estados
+       .attr("d", path)//posicoes do poligono definadas pela path
+       .attr("class","saoPaulo")//atribuindo uma class 'states' para todos os estados
+       ;
+};
+</script>
+
+<div>
+  <p>Corinthians, Palmeiras, Santos e São Paulo</p>
+</div>
+</body>
+</html>
