@@ -16,7 +16,7 @@
 			value = "cruzeiro";
 			console.log("consoolee"+value);
 			
-			$("body").load("/bdg-visu/times.html", teste=value);
+			$("body").load("../bdg-visu/times.html", teste=value);
 		});
 	});
 	</script>
@@ -118,6 +118,19 @@ path {
 	fill: #ddd;
  	stroke: #fff;
 }
+
+text {
+  pointer-events: none;
+  text-anchor: middle;
+  font: 12px sans-serif;
+  text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+}
+
+text.mouseenter,
+text.mouseleave {
+  fill: red;
+  font-weight: bold;
+}
 </style>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
@@ -213,81 +226,171 @@ var path = d3.geo.path()
 	.projection(projection)
 	.pointRadius(2.5);//vai desenhar na tela de acordo com a projecao cartografica
 
-//para carregar o arquivo mais rapido
+var tooltip = d3.select("body")
+	.append("div")
+	.style("position", "absolute")
+	.style("z-index", "10")
+	.style("visibility", "hidden")
+	.text(teste);
+
+var tooltip1 = d3.select("body")
+	.append("div")
+	.style("position", "absolute")
+	.style("z-index", "10")
+	.style("visibility", "hidden")
+	.text("Cruzeiro");
+	
+var tooltip2 = d3.select("body")
+	.append("div")
+	.style("position", "absolute")
+	.style("z-index", "10")
+	.style("visibility", "hidden")
+	.text("Atlético-MG");
+	
+var tooltip3 = d3.select("body")
+	.append("div")
+	.style("position", "absolute")
+	.style("z-index", "10")
+	.style("visibility", "hidden")
+	.text("Botafogo");
+
+var tooltip4 = d3.select("body")
+	.append("div")
+	.style("position", "absolute")
+	.style("z-index", "10")
+	.style("visibility", "hidden")
+	.text("Flamengo");
+var tooltip5 = d3.select("body")
+	.append("div")
+	.style("position", "absolute")
+	.style("z-index", "10")
+	.style("visibility", "hidden")
+	.text("Fluminense");
+
+var tooltip6 = d3.select("body")
+	.append("div")
+	.style("position", "absolute")
+	.style("z-index", "10")
+	.style("visibility", "hidden")
+	.text("Vasco");
+
+var tooltip7 = d3.select("body")
+	.append("div")
+	.style("position", "absolute")
+	.style("z-index", "10")
+	.style("visibility", "hidden")
+	.text("Corinthians");
+
+var tooltip8 = d3.select("body")
+	.append("div")
+	.style("position", "absolute")
+	.style("z-index", "10")
+	.style("visibility", "hidden")
+	.text("Palmeiras");
+
+var tooltip9 = d3.select("body")
+	.append("div")
+	.style("position", "absolute")
+	.style("z-index", "10")
+	.style("visibility", "hidden")
+	.text("Santos");
+
+var tooltip10 = d3.select("body")
+	.append("div")
+	.style("position", "absolute")
+	.style("z-index", "10")
+	.style("visibility", "hidden")
+	.text("São Paulo");
+	
+var tooltip11 = d3.select("body")
+	.append("div")
+	.style("position", "absolute")
+	.style("z-index", "10")
+	.style("visibility", "hidden")
+	.text("Grêmio");
+
+var tooltip12 = d3.select("body")
+	.append("div")
+	.style("position", "absolute")
+	.style("z-index", "10")
+	.style("visibility", "hidden")
+	.text("Internacional");
+	
+	//para carregar o arquivo mais rapido
 /*.defer(d3.json,"mapa_brasil_topo_json/br-states-heavy.json")//carrega o arquivo*/
 
 if (teste == "cruzeiro")
 queue()
-	.defer(d3.json,"/bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
-	.defer(d3.json,"/bdg-visu/data_json/cruzeiro_alter_topo.json")
+	.defer(d3.json,"../bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
+	.defer(d3.json,"../bdg-visu/data_json/cruzeiro_alter_topo.json")
 	.await(ready);
 
 if (teste == "atletico")
 queue()
-	.defer(d3.json,"/bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
-	.defer(d3.json,"/bdg-visu/data_json/atletico_alter_topo.json")
+	.defer(d3.json,"../bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
+	.defer(d3.json,"../bdg-visu/data_json/atletico_alter_topo.json")
 	.await(ready);	
 
 if (teste == "flamengo")
 queue()
-	.defer(d3.json,"/bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
-	.defer(d3.json,"/bdg-visu/data_json/flamengo_alter_topo.json")
+	.defer(d3.json,"../bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
+	.defer(d3.json,"../bdg-visu/data_json/flamengo_alter_topo.json")
 	.await(ready);
 	
 if (teste == "corinthians")
 queue()
-	.defer(d3.json,"/bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
-	.defer(d3.json,"/bdg-visu/data_json/corinthians_alter_topo.json")
+	.defer(d3.json,"../bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
+	.defer(d3.json,"../bdg-visu/data_json/corinthians_alter_topo.json")
 	.await(ready);	
 
 if (teste == "mg")
 queue()
-	.defer(d3.json,"/bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
-	.defer(d3.json,"/bdg-visu/data_json/cruzeiro_alter_topo.json")
-	.defer(d3.json,"/bdg-visu/data_json/atletico_alter_topo.json")
+	.defer(d3.json,"../bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
+	.defer(d3.json,"../bdg-visu/data_json/cruzeiro_alter_topo.json")
+	.defer(d3.json,"../bdg-visu/data_json/atletico_alter_topo.json")
 	.await(ready);
 
 if (teste == "rj")
 queue()
-.defer(d3.json,"/bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
-	.defer(d3.json,"/bdg-visu/data_json/botafogo_alter_topo.json")
-	.defer(d3.json,"/bdg-visu/data_json/flamengo_alter_topo.json")
-	.defer(d3.json,"/bdg-visu/data_json/fluminense_alter_topo.json")
-	.defer(d3.json,"/bdg-visu/data_json/vasco_alter_topo.json")
+.defer(d3.json,"../bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
+	.defer(d3.json,"../bdg-visu/data_json/botafogo_alter_topo.json")
+	.defer(d3.json,"../bdg-visu/data_json/flamengo_alter_topo.json")
+	.defer(d3.json,"../bdg-visu/data_json/fluminense_alter_topo.json")
+	.defer(d3.json,"../bdg-visu/data_json/vasco_alter_topo.json")
 	.await(ready);
 
 if (teste == "sp")
 queue()
-	.defer(d3.json,"/bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
-	.defer(d3.json,"/bdg-visu/data_json/corinthians_alter_topo.json")
-	.defer(d3.json,"/bdg-visu/data_json/palmeiras_alter_topo.json")
-	.defer(d3.json,"/bdg-visu/data_json/santos_alter_topo.json")
-	.defer(d3.json,"/bdg-visu/data_json/saoPaulo_alter_topo.json")
+	.defer(d3.json,"../bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
+	.defer(d3.json,"../bdg-visu/data_json/corinthians_alter_topo.json")
+	.defer(d3.json,"../bdg-visu/data_json/palmeiras_alter_topo.json")
+	.defer(d3.json,"../bdg-visu/data_json/santos_alter_topo.json")
+	.defer(d3.json,"../bdg-visu/data_json/saoPaulo_alter_topo.json")
 	.await(ready);
 
 	
 if (teste == "rs")
 queue()
-	.defer(d3.json,"/bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
-	.defer(d3.json,"/bdg-visu/data_json/gremio_alter_topo.json")
-	.defer(d3.json,"/bdg-visu/data_json/inter_alter_topo.json")
+	.defer(d3.json,"../bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
+	.defer(d3.json,"../bdg-visu/data_json/gremio_alter_topo.json")
+	.defer(d3.json,"../bdg-visu/data_json/inter_alter_topo.json")
 	.await(ready);
 
 if (teste == "todos")
 queue()
-	.defer(d3.json,"/bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
-	.defer(d3.json,"/bdg-visu/data_json/corinthians_alter_topo.json")
-	.defer(d3.json,"/bdg-visu/data_json/palmeiras_alter_topo.json")
-	.defer(d3.json,"/bdg-visu/data_json/santos_alter_topo.json")
-	.defer(d3.json,"/bdg-visu/data_json/saoPaulo_alter_topo.json")
-  .defer(d3.json,"/bdg-visu/data_json/cruzeiro_alter_topo.json")
-  .defer(d3.json,"/bdg-visu/data_json/atletico_alter_topo.json")
-  .defer(d3.json,"/bdg-visu/data_json/botafogo_alter_topo.json")
-  .defer(d3.json,"/bdg-visu/data_json/flamengo_alter_topo.json")
-  .defer(d3.json,"/bdg-visu/data_json/fluminense_alter_topo.json")
-  .defer(d3.json,"/bdg-visu/data_json/vasco_alter_topo.json")
-  .defer(d3.json,"/bdg-visu/data_json/gremio_alter_topo.json")
-  .defer(d3.json,"/bdg-visu/data_json/inter_alter_topo.json")
+	.defer(d3.json,"../bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
+	.defer(d3.json,"../bdg-visu/data_json/corinthians_alter_topo.json")
+	.defer(d3.json,"../bdg-visu/data_json/palmeiras_alter_topo.json")
+	.defer(d3.json,"../bdg-visu/data_json/santos_alter_topo.json")
+	.defer(d3.json,"../bdg-visu/data_json/saoPaulo_alter_topo.json")
+  .defer(d3.json,"../bdg-visu/data_json/cruzeiro_alter_topo.json")
+  .defer(d3.json,"../bdg-visu/data_json/atletico_alter_topo.json")
+  .defer(d3.json,"../bdg-visu/data_json/botafogo_alter_topo.json")
+  .defer(d3.json,"../bdg-visu/data_json/flamengo_alter_topo.json")
+  .defer(d3.json,"../bdg-visu/data_json/fluminense_alter_topo.json")
+  .defer(d3.json,"../bdg-visu/data_json/vasco_alter_topo.json")
+  .defer(d3.json,"../bdg-visu/data_json/gremio_alter_topo.json")
+  .defer(d3.json,"../bdg-visu/data_json/inter_alter_topo.json")
 	.await(ready);
 
 	
@@ -369,23 +472,34 @@ function ready (error, br_states,time1,time2, time3, time4, time5, time6, time7,
 			.attr("d",path)		
 		;
 
-	if(teste != "mg" || teste != "rj")
+	if(teste != "mg" || teste != "rj" || teste != "rs" || teste != "sp" || teste != "todos")
 	svg.append("path")
 		.datum(time)//desenha de acordo com os estados
 		.attr("d", path)//posicoes do poligono definadas pela path
 		.attr("class",teste)//atribuindo uma class 'states' para todos os estados
+		.on("mouseover", function(){return tooltip.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip.style("visibility", "hidden");})
+		;
+		
 	
 	if(teste == "mg"){
 	svg.append("path")
 		.datum(cruzeiro)//desenha de acordo com os estados
 		.attr("d", path)//posicoes do poligono definadas pela path
 		.attr("class","cruzeiro")//atribuindo uma class 'states' para todos os estados
+		.on("mouseover", function(){return tooltip1.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip1.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip1.style("visibility", "hidden");})
 		;
 		
 	svg.append("path")
 		.datum(atletico)//desenha de acordo com os estados
 		.attr("d", path)//posicoes do poligono definadas pela path
 		.attr("class","atletico")//atribuindo uma class 'states' para todos os estados
+		.on("mouseover", function(){return tooltip2.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip2.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip2.style("visibility", "hidden");})
 		;
 	
 	}
@@ -395,22 +509,34 @@ function ready (error, br_states,time1,time2, time3, time4, time5, time6, time7,
 		.datum(botafogo)//desenha de acordo com os estados
 		.attr("d", path)//posicoes do poligono definadas pela path
 		.attr("class","botafogo")//atribuindo uma class 'states' para todos os estados
+		.on("mouseover", function(){return tooltip3.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip3.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip3.style("visibility", "hidden");})
 		;
 
 	svg.append("path")
 		.datum(flamengo)//desenha de acordo com os estados
 		.attr("d", path)//posicoes do poligono definadas pela path
 		.attr("class","flamengo")//atribuindo uma class 'states' para todos os estados
+		.on("mouseover", function(){return tooltip4.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip4.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip4.style("visibility", "hidden");})
 		;
 	svg.append("path")
 		.datum(fluminense)//desenha de acordo com os estados
 		.attr("d", path)//posicoes do poligono definadas pela path
 		.attr("class","fluminense")//atribuindo uma class 'states' para todos os estados
+		.on("mouseover", function(){return tooltip5.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip5.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip5.style("visibility", "hidden");})
 		;
 	svg.append("path")
 		.datum(vasco)//desenha de acordo com os estados
 		.attr("d", path)//posicoes do poligono definadas pela path
 		.attr("class","vasco")//atribuindo uma class 'states' para todos os estados
+		.on("mouseover", function(){return tooltip6.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip6.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip6.style("visibility", "hidden");})
 		;
 	}
 
@@ -419,23 +545,35 @@ function ready (error, br_states,time1,time2, time3, time4, time5, time6, time7,
        .datum(corinthians)//desenha de acordo com os estados
        .attr("d", path)//posicoes do poligono definadas pela path
        .attr("class","corinthians")//atribuindo uma class 'states' para todos os estados
-       ;
+       	.on("mouseover", function(){return tooltip7.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip7.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip7.style("visibility", "hidden");})
+		;
 
      svg.append("path")
        .datum(palmeiras)//desenha de acordo com os estados
        .attr("d", path)//posicoes do poligono definadas pela path
        .attr("class","palmeiras")//atribuindo uma class 'states' para todos os estados
-       ;
+       .on("mouseover", function(){return tooltip8.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip8.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip8.style("visibility", "hidden");})
+		;
     svg.append("path")
        .datum(santos)//desenha de acordo com os estados
        .attr("d", path)//posicoes do poligono definadas pela path
        .attr("class","santos")//atribuindo uma class 'states' para todos os estados
-       ;
+       .on("mouseover", function(){return tooltip9.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip9.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip9.style("visibility", "hidden");})
+		;
      svg.append("path")
        .datum(saoPaulo)//desenha de acordo com os estados
        .attr("d", path)//posicoes do poligono definadas pela path
        .attr("class","saoPaulo")//atribuindo uma class 'states' para todos os estados
-       ;
+       .on("mouseover", function(){return tooltip10.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip10.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip10.style("visibility", "hidden");})
+		;
 	
 	}
 
@@ -444,12 +582,18 @@ function ready (error, br_states,time1,time2, time3, time4, time5, time6, time7,
 		.datum(gremio)//desenha de acordo com os estados
 		.attr("d", path)//posicoes do poligono definadas pela path
 		.attr("class","gremio")//atribuindo uma class 'states' para todos os estados
+		.on("mouseover", function(){return tooltip11.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip11.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip11.style("visibility", "hidden");})
 		;
 
 	svg.append("path")
 		.datum(inter)//desenha de acordo com os estados
 		.attr("d", path)//posicoes do poligono definadas pela path
 		.attr("class","inter")//atribuindo uma class 'states' para todos os estados
+		.on("mouseover", function(){return tooltip12.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip12.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip12.style("visibility", "hidden");})
 		;
 	}
 	
@@ -458,72 +602,108 @@ function ready (error, br_states,time1,time2, time3, time4, time5, time6, time7,
        .datum(corinthians)//desenha de acordo com os estados
        .attr("d", path)//posicoes do poligono definadas pela path
        .attr("class","corinthians")//atribuindo uma class 'states' para todos os estados
-       ;
+       .on("mouseover", function(){return tooltip7.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip7.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip7.style("visibility", "hidden");})
+		;
 
      svg.append("path")
        .datum(palmeiras)//desenha de acordo com os estados
        .attr("d", path)//posicoes do poligono definadas pela path
        .attr("class","palmeiras")//atribuindo uma class 'states' para todos os estados
-       ;
+       .on("mouseover", function(){return tooltip8.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip8.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip8.style("visibility", "hidden");})
+		;
 
     svg.append("path")
        .datum(santos)//desenha de acordo com os estados
        .attr("d", path)//posicoes do poligono definadas pela path
        .attr("class","santos")//atribuindo uma class 'states' para todos os estados
-       ;
+       .on("mouseover", function(){return tooltip9.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip9.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip9.style("visibility", "hidden");})
+		;
 
     svg.append("path")
        .datum(saoPaulo)//desenha de acordo com os estados
        .attr("d", path)//posicoes do poligono definadas pela path
        .attr("class","saoPaulo")//atribuindo uma class 'states' para todos os estados
-       ;
+       .on("mouseover", function(){return tooltip10.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip10.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip10.style("visibility", "hidden");})
+		;
 
     svg.append("path")
       .datum(cruzeiro)//desenha de acordo com os estados
       .attr("d", path)//posicoes do poligono definadas pela path
       .attr("class","cruzeiro")//atribuindo uma class 'states' para todos os estados
-      ;
+      .on("mouseover", function(){return tooltip1.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip1.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip1.style("visibility", "hidden");})
+		;
 
     svg.append("path")
       .datum(atletico)//desenha de acordo com os estados
       .attr("d", path)//posicoes do poligono definadas pela path
       .attr("class","atletico")//atribuindo uma class 'states' para todos os estados
-      ;
+      .on("mouseover", function(){return tooltip2.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip2.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip2.style("visibility", "hidden");})
+		;
     svg.append("path")
       .datum(botafogo)//desenha de acordo com os estados
       .attr("d", path)//posicoes do poligono definadas pela path
       .attr("class","botafogo")//atribuindo uma class 'states' para todos os estados
-      ;
+      .on("mouseover", function(){return tooltip3.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip3.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip3.style("visibility", "hidden");})
+		;
 
     svg.append("path")
       .datum(flamengo)//desenha de acordo com os estados
       .attr("d", path)//posicoes do poligono definadas pela path
       .attr("class","flamengo")//atribuindo uma class 'states' para todos os estados
-      ;
+      .on("mouseover", function(){return tooltip4.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip4.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip4.style("visibility", "hidden");})
+		;
 
     svg.append("path")
       .datum(fluminense)//desenha de acordo com os estados
       .attr("d", path)//posicoes do poligono definadas pela path
       .attr("class","fluminense")//atribuindo uma class 'states' para todos os estados
-      ;
+      .on("mouseover", function(){return tooltip5.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip5.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip5.style("visibility", "hidden");})
+		;
 
     svg.append("path")
       .datum(vasco)//desenha de acordo com os estados
       .attr("d", path)//posicoes do poligono definadas pela path
       .attr("class","vasco")//atribuindo uma class 'states' para todos os estados
-      ;
+      .on("mouseover", function(){return tooltip6.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip6.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip6.style("visibility", "hidden");})
+		;
 
     svg.append("path")
       .datum(gremio)//desenha de acordo com os estados
       .attr("d", path)//posicoes do poligono definadas pela path
       .attr("class","gremio")//atribuindo uma class 'states' para todos os estados
-      ;
+      .on("mouseover", function(){return tooltip11.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip11.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip11.style("visibility", "hidden");})
+		;
 
     svg.append("path")
       .datum(inter)//desenha de acordo com os estados
       .attr("d", path)//posicoes do poligono definadas pela path
       .attr("class","inter")//atribuindo uma class 'states' para todos os estados
-      ;  
+      .on("mouseover", function(){return tooltip12.style("visibility", "visible");})
+		.on("mousemove", function(){return tooltip12.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		.on("mouseout", function(){return tooltip12.style("visibility", "hidden");})
+		;  
 	}
 	
 	};
