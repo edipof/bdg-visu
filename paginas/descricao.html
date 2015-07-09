@@ -56,34 +56,36 @@
         <!-- /.container -->
     </nav>
     <div class="container">
-      <h2>Sobre o Trabalho</h2>
-      <p>
-        <h3>Proposta</h3>
-          O trabalho em questão desenvolve uma visualização para observar onde no território brasileiro os 12 principais clubes do Brasil
-          são referênciados através de tweets geolocalizados feitos no ano de 2014. Com esta visualização podemos avaliar se realmente alguns times
-          tem reconhecimento nacional e torcedores espalhado por todo o país.
-        <br><br>
-        <hr>
-        <h3>Tratamento dos dados</h3>
-          Os dados utilizados foram coletados do Twitter através da API que ele disponibiliza. São dados
-          com coordenadas geográficas  de todo ano 2014. A base de dados inicial, com tweets, coordenadas geográficas
-          e nome da cidade e estado onde o tweet foi realizado, possuia cerca de 25gb de dados no formato tsv.
-          Os dados foram filtrados e tratados utilizando algumas técnologias
-          que seram mostradas mais a frente no decorrer do relatório. <br><br>
+      <div class="jumbotron">
+        <h2>Sobre o Trabalho</h2>
+        <p>
+          <h3>Proposta</h3>
+            O trabalho em questão desenvolve uma visualização para observar onde no território brasileiro os 12 principais clubes do Brasil
+            são referênciados através de tweets geolocalizados feitos no ano de 2014. Com esta visualização podemos avaliar se realmente alguns times
+            tem reconhecimento nacional e torcedores espalhado por todo o país.
+          <br><br>
+          <hr>
+          <h3>Tratamento dos dados</h3>
+            Os dados utilizados foram coletados do Twitter através da API que ele disponibiliza. São dados
+            com coordenadas geográficas  de todo ano 2014. A base de dados inicial, com tweets, coordenadas geográficas
+            e nome da cidade e estado onde o tweet foi realizado, possuia cerca de 25gb de dados no formato tsv.
+            Os dados foram filtrados e tratados utilizando algumas técnologias
+            que seram mostradas mais a frente no decorrer do relatório. <br><br>
 
-          Para realizar o tratamento dos dados foi utilizado o Apache Spark que é um processador de dados em larga escala muito rápido,
-          rodando em cima da estrutura do Hadoop. Para que o processamento fosse possível, foram desenvolvidos scripts para realizar a
-          filtragem desses dados, estes foram desenvolvidos em Scala uma linguagem funcional advinda do Java que é uma das linguagens
-          utilizadas para escrever scripts para rodar no Apache Spark.<br><br>
+            Para realizar o tratamento dos dados foi utilizado o Apache Spark que é um processador de dados em larga escala muito rápido,
+            rodando em cima da estrutura do Hadoop. Para que o processamento fosse possível, foram desenvolvidos scripts para realizar a
+            filtragem desses dados, estes foram desenvolvidos em Scala uma linguagem funcional advinda do Java que é uma das linguagens
+            utilizadas para escrever scripts para rodar no Apache Spark.<br><br>
 
-          Como a base de dados era muito grande e o tempo não era suficiente para
-          fazer um trabalho minucioso para obter todos os dados referentes aos times
-          avaliados, então optou­se pela utilização das principais hashtags (#) que os
-          torcedores desses times usam para referência­los na web. As '#' utilizadas podem
-          ser vistas em formato de nuvem <a href="cloud/hashtags.html">aqui</a>.<br><br>
+            Como a base de dados era muito grande e o tempo não era suficiente para
+            fazer um trabalho minucioso para obter todos os dados referentes aos times
+            avaliados, então optou­se pela utilização das principais hashtags (#) que os
+            torcedores desses times usam para referência­los na web. As '#' utilizadas podem
+            ser vistas em formato de nuvem <a href="cloud/hashtags.html">aqui</a>.<br><br>
 
           Estes dados, após serem filtradas, foram exportados para o formato GeoJson, através de um
           script feito em Ruby, para facilitar a leitura do dado no momento da visualização
+          <br><br>
         <hr>
         <h3>Visualização</h3>
           Para gerar a visualização dos dados foi utilizado uma biblioteca javascript chamada D3.js (Data
