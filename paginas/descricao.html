@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+     <style>
+    body {
+        padding-top: 70px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
+    <title>Visualização de Dados - Trabalho Final</title>
+</head>
+
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../times.html">Trabalho Final</a>
+            </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="../times.html">Localização Tweets no Mapa do Brasil</a>
+                    </li>
+                    <li>
+                        <a href="cloud/hashtags.html">Hashtags</a>
+                    </li>
+                    <li>
+                        <a href="grupo.html">Grupo</a>
+                    </li>
+                    <li>
+                        <a href="">Sobre o Trabalho</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <div class="container">
+      <h2>Sobre o Trabalho</h2>
+      <p>
+        <h3>Proposta</h3>
+          O trabalho em questão desenvolve uma visualização para observar onde no território brasileiro os 12 principais clubes do Brasil
+          são referênciados através de tweets geolocalizados feitos no ano de 2014. Com esta visualização podemos avaliar se realmente alguns times
+          tem reconhecimento nacional e torcedores espalhado por todo o país.
+        <br><br>
+        <hr>
+        <h3>Tratamento dos dados</h3>
+          Os dados utilizados foram coletados do Twitter através da API que ele disponibiliza. São dados
+          com coordenadas geográficas  de todo ano 2014. A base de dados inicial, com tweets, coordenadas geográficas
+          e nome da cidade e estado onde o tweet foi realizado, possuia cerca de 25gb de dados no formato tsv.
+          Os dados foram filtrados e tratados utilizando algumas técnologias
+          que seram mostradas mais a frente no decorrer do relatório. <br><br>
+
+          Para realizar o tratamento dos dados foi utilizado o Apache Spark que é um processador de dados em larga escala muito rápido,
+          rodando em cima da estrutura do Hadoop. Para que o processamento fosse possível, foram desenvolvidos scripts para realizar a
+          filtragem desses dados, estes foram desenvolvidos em Scala uma linguagem funcional advinda do Java que é uma das linguagens
+          utilizadas para escrever scripts para rodar no Apache Spark.<br><br>
+
+          Como a base de dados era muito grande e o tempo não era suficiente para
+          fazer um trabalho minucioso para obter todos os dados referentes aos times
+          avaliados, então optou­se pela utilização das principais hashtags (#) que os
+          torcedores desses times usam para referência­los na web. As '#' utilizadas podem
+          ser vistas em formato de nuvem <a href="cloud/hashtags.html">aqui</a>.<br><br>
+
+          Estes dados, após serem filtradas, foram exportados para o formato GeoJson, através de um
+          script feito em Ruby, para facilitar a leitura do dado no momento da visualização
+        <hr>
+        <h3>Visualização</h3>
+          Para gerar a visualização dos dados foi utilizado uma biblioteca javascript chamada D3.js (Data
+          Driven Documents) é usada para manipulação de documentos baseados em dados. Utilizando
+          essa biblioteca é possível criar visualização de gráficos interativos usando HTML, CSS e SVG.
+          <br><br>
+          Por ser uma biblioteca javascript, tem foco em padrões web, podendo ter comportamentos
+          diferentes nos diversos navegadores existentes. Essa biblioteca permite criar diversos tipos de
+          gráficos e figuras geométricas.
+          <br><br>
+          A principio as visualizações foram implementadas utilizando como entrada os arquivos em formato Geojson
+          gerado pelo script em Ruby, porem este é um formato de dados muito grande e estavam deixando as visualizações pesadas. Então como alternativa foram
+          utilizados como entrada arquivos do tipo Topojson que é um dado tipo de dado com todas as informações de um
+          Geojson porém de forma comprimida o que diminui consideravelmente o tamanho dos dados.
+          <br><br>
+        <hr>
+        <h3>Avaliação da Visualização</h3>
+          Após a finalização da visualizaão, foi possivel tirar algumas conclusões em cima daquilo que implementado, por exemplo,
+          foi possível observar que times como Corinthians e Flamengo tem um grande numero de torcedores espalhados pelo Pais, contendo
+          tweets em todo Brasil, inclusive no Acré, Rondônia, entre outros estados. Uma possivel causa desse espalhamento, pode estar diretamente relacionado
+          ao numero elevado de jogos transmitidos destes times para todo o Brasil pelas TVs abertas.
+          <br><br>
+          Um fato curioso que não era esperado foi o grande numero de tweets relacionados ao Atletico-MG espalhados por todo o pais,
+          o esperado era que estes dados estivessem centralizados em Minas Gerais. Uma hipotese que pode estar relacionada a este fenômeno
+          é o fato deste time vir de uma série de conquistas de titulos importantes nos ultimos anos, o que pode ter aumentado numero de seus torcedores
+          em todo o terrtório nacional.
+          <br><br>
+          Outro fato curioso é que alguns times são citados também fora do Brasil, o Palmeiras é um excelente exemplo deste fato, que a principio
+          não obtivemos nenhum possivel argumento que possa justificar essa situação.
+          <br><br>
+        <hr>
+      </p>
+    </div>
+        <footer>
+            <div class="row">
+                <div class="col-lg-12" align="center">
+                    <p> Departamento de Ciência da Computação - Universidade Federal de Minas Gerais - 2015</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
