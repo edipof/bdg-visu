@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	
-	
+
+
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-	
-	
+
+
 	<script type="text/javascript">
-	
+
 	$("#head").ready(function(){
 		$("#grafo").change(function( e ){
 			e.preventDefault();
@@ -15,7 +15,7 @@
 			if(!value)
 			value = "cruzeiro";
 			console.log("consoolee"+value);
-			
+
 			$("body").load("../bdg-visu/times.html", teste=value);
 		});
 	});
@@ -162,7 +162,7 @@ text.mouseleave {
                         <a href="paginas/grupo.html">Grupo</a>
                     </li>
                     <li>
-                        <a href="#">Sobre o Trabalho</a>
+                        <a href="paginas/descricao.html">Sobre o Trabalho</a>
                     </li>
                 </ul>
             </div>
@@ -176,12 +176,12 @@ text.mouseleave {
 
 
 
-	
+
 		 <div id="grafos">
 		<div class="row">
             <div class="col-lg-12">
-                  
-        	
+
+
 					<select id="grafo" class="form-control">
 					  <option  value="0" selected="selected">Visualizar outro time</option>
 					  <option  value="atletico">Atletico</option>
@@ -193,21 +193,21 @@ text.mouseleave {
                       <option value="sp">Times de São Paulo</option>
                       <option value="rs">Times do Rio Grande do Sul</option>
 					<option value="todos">Todos os times</option>
-        
-					
+
+
 					</ul>
                   </br>
-                    
+
                 </br>
             </div>
         </div>
-       
+
 
 
 		</div>
-        
-		
-		
+
+
+
 		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="http://d3js.org/queue.v1.min.js"></script>
 <script src="http://d3js.org/topojson.v1.min.js" charset="utf-8"></script>
@@ -245,14 +245,14 @@ var tooltip1 = d3.select("body")
 	.style("z-index", "10")
 	.style("visibility", "hidden")
 	.text("Cruzeiro");
-	
+
 var tooltip2 = d3.select("body")
 	.append("div")
 	.style("position", "absolute")
 	.style("z-index", "10")
 	.style("visibility", "hidden")
 	.text("Atlético-MG");
-	
+
 var tooltip3 = d3.select("body")
 	.append("div")
 	.style("position", "absolute")
@@ -307,7 +307,7 @@ var tooltip10 = d3.select("body")
 	.style("z-index", "10")
 	.style("visibility", "hidden")
 	.text("São Paulo");
-	
+
 var tooltip11 = d3.select("body")
 	.append("div")
 	.style("position", "absolute")
@@ -321,7 +321,7 @@ var tooltip12 = d3.select("body")
 	.style("z-index", "10")
 	.style("visibility", "hidden")
 	.text("Internacional");
-	
+
 	//para carregar o arquivo mais rapido
 /*.defer(d3.json,"mapa_brasil_topo_json/br-states-heavy.json")//carrega o arquivo*/
 
@@ -335,19 +335,19 @@ if (teste == "atletico")
 queue()
 	.defer(d3.json,"../bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
 	.defer(d3.json,"../bdg-visu/data_json/atletico_alter_topo.json")
-	.await(ready);	
+	.await(ready);
 
 if (teste == "flamengo")
 queue()
 	.defer(d3.json,"../bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
 	.defer(d3.json,"../bdg-visu/data_json/flamengo_alter_topo.json")
 	.await(ready);
-	
+
 if (teste == "corinthians")
 queue()
 	.defer(d3.json,"../bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
 	.defer(d3.json,"../bdg-visu/data_json/corinthians_alter_topo.json")
-	.await(ready);	
+	.await(ready);
 
 if (teste == "mg")
 queue()
@@ -374,7 +374,7 @@ queue()
 	.defer(d3.json,"../bdg-visu/data_json/saoPaulo_alter_topo.json")
 	.await(ready);
 
-	
+
 if (teste == "rs")
 queue()
 	.defer(d3.json,"../bdg-visu/mapa_brasil_topo_json/states.json")//carrega o arquivo
@@ -399,13 +399,13 @@ queue()
   .defer(d3.json,"../bdg-visu/data_json/inter_alter_topo.json")
 	.await(ready);
 
-	
+
 //Para colorir
 var color = d3.scale.ordinal()
   .range(["#FFEBCD","#FAFAD2","#F0F8FF","#E0FFFF","#EEE8AA"]);
 
  var time1,time3,time4,time5,time6,time7,time8,time9,time10,time11,time12;
-if (teste == "atletico" || teste == "flamengo" || teste == "cruzeiro" || teste == "corinthians")  
+if (teste == "atletico" || teste == "flamengo" || teste == "cruzeiro" || teste == "corinthians")
 function ready (error, br_states,time1,time2, time3, time4, time5, time6, time7, time8, time9, time10, time11, time12){
 	if(error) return console.error(error);
 
@@ -414,8 +414,8 @@ function ready (error, br_states,time1,time2, time3, time4, time5, time6, time7,
 	//var states = topojson.feature(br_states,br_states.objects.states);
 	var states = br_states;
 	var time;
-	
-	
+
+
 	if(teste == "atletico")
 	time = topojson.feature(time1,time1.objects.atletico);
 	if(teste == "corinthians")
@@ -436,14 +436,14 @@ function ready (error, br_states,time1,time2, time3, time4, time5, time6, time7,
 	var fluminense = topojson.feature(time3,time3.objects.fluminense);
 	var vasco = topojson.feature(time4,time4.objects.vasco);
 	}
-	
+
 	if(teste == "sp"){
 	var corinthians = topojson.feature(time1,time1.objects.corinthians);
      var palmeiras = topojson.feature(time2,time2.objects.palmeiras);
      var santos = topojson.feature(time3,time3.objects.santos);
      var saoPaulo = topojson.feature(time4,time4.objects.saoPaulo);
 	}
-	
+
 	if(teste == "rs"){
 	var gremio = topojson.feature(time1,time1.objects.gremio);
 	var inter = topojson.feature(time2,time2.objects.inter);
@@ -467,7 +467,7 @@ function ready (error, br_states,time1,time2, time3, time4, time5, time6, time7,
      var inter = topojson.feature(time12,time12.objects.inter);
 	}
 	//versao com cor
-	
+
 	svg.append("g")
 			.attr("class","states")//atribuindo uma class 'states' para todos os estados
 		.selectAll("path")
@@ -475,7 +475,7 @@ function ready (error, br_states,time1,time2, time3, time4, time5, time6, time7,
 		.enter().append("path")
 														//tira os espacos em branco e pega o tamanho
 			.style('fill',function(d){return color(d.properties.region.length);})
-			.attr("d",path)		
+			.attr("d",path)
 		;
 
 	if(teste != "mg" || teste != "rj" || teste != "rs" || teste != "sp" || teste != "todos")
@@ -487,8 +487,8 @@ function ready (error, br_states,time1,time2, time3, time4, time5, time6, time7,
 		.on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
 		.on("mouseout", function(){return tooltip.style("visibility", "hidden");})
 		;
-		
-	
+
+
 	if(teste == "mg"){
 	svg.append("path")
 		.datum(cruzeiro)//desenha de acordo com os estados
@@ -498,7 +498,7 @@ function ready (error, br_states,time1,time2, time3, time4, time5, time6, time7,
 		.on("mousemove", function(){return tooltip1.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
 		.on("mouseout", function(){return tooltip1.style("visibility", "hidden");})
 		;
-		
+
 	svg.append("path")
 		.datum(atletico)//desenha de acordo com os estados
 		.attr("d", path)//posicoes do poligono definadas pela path
@@ -507,7 +507,7 @@ function ready (error, br_states,time1,time2, time3, time4, time5, time6, time7,
 		.on("mousemove", function(){return tooltip2.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
 		.on("mouseout", function(){return tooltip2.style("visibility", "hidden");})
 		;
-	
+
 	}
 
 	if (teste == "rj"){
@@ -580,7 +580,7 @@ function ready (error, br_states,time1,time2, time3, time4, time5, time6, time7,
 		.on("mousemove", function(){return tooltip10.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
 		.on("mouseout", function(){return tooltip10.style("visibility", "hidden");})
 		;
-	
+
 	}
 
 	if (teste == "rs"){
@@ -602,7 +602,7 @@ function ready (error, br_states,time1,time2, time3, time4, time5, time6, time7,
 		.on("mouseout", function(){return tooltip12.style("visibility", "hidden");})
 		;
 	}
-	
+
 	if (teste == "todos"){
 	     svg.append("path")
        .datum(corinthians)//desenha de acordo com os estados
@@ -709,17 +709,17 @@ function ready (error, br_states,time1,time2, time3, time4, time5, time6, time7,
       .on("mouseover", function(){return tooltip12.style("visibility", "visible");})
 		.on("mousemove", function(){return tooltip12.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
 		.on("mouseout", function(){return tooltip12.style("visibility", "hidden");})
-		;  
+		;
 	}
-	
+
 	};
 
 </script>
 
 
-		
-	
-		
+
+
+
 		<!-- Footer -->
         <footer>
             <div class="row">
@@ -732,7 +732,7 @@ function ready (error, br_states,time1,time2, time3, time4, time5, time6, time7,
         </footer>
 
     </div>
-    
+
 
 </body>
 
